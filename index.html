@@ -24,20 +24,14 @@
       font-family: ui-rounded, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
       color:var(--ink);
       overflow:hidden;
-      padding: 18px;
+      padding:18px;
       background:
         radial-gradient(1200px 700px at 20% 10%, rgba(255,255,255,.65), transparent 55%),
         radial-gradient(900px 600px at 85% 80%, rgba(255,255,255,.45), transparent 55%),
         linear-gradient(135deg, var(--bg1), var(--bg2));
     }
 
-    /* floating layer */
-    .floaty{
-      position:absolute;
-      inset:-10vh -10vw;
-      pointer-events:none;
-      user-select:none;
-    }
+    .floaty{ position:absolute; inset:-10vh -10vw; pointer-events:none; }
 
     .heart{
       position:absolute;
@@ -45,67 +39,49 @@
       transform: rotate(45deg);
       background: rgba(255,255,255,.55);
       animation: drift linear infinite;
-      border-radius: 3px;
-      filter: drop-shadow(0 6px 10px rgba(0,0,0,.08));
-      opacity:.95;
+      border-radius:3px;
     }
     .heart:before,.heart:after{
       content:"";
       position:absolute;
       width:18px; height:18px;
-      background: inherit;
-      border-radius: 50%;
+      background:inherit;
+      border-radius:50%;
     }
-    .heart:before{ left:-9px; top:0; }
-    .heart:after{ left:0; top:-9px; }
+    .heart:before{ left:-9px; }
+    .heart:after{ top:-9px; }
 
     @keyframes drift{
       from{ transform: translateY(120vh) rotate(45deg); }
       to{ transform: translateY(-20vh) rotate(45deg); }
     }
 
-    /* floating chicks */
     .chick{
       position:absolute;
-      font-size: 22px;
+      font-size:22px;
       animation: floatChick linear infinite;
-      opacity:.9;
-      filter: drop-shadow(0 8px 12px rgba(0,0,0,.10));
     }
     @keyframes floatChick{
-      from{ transform: translateY(120vh) translateX(0px) rotate(-6deg); }
+      from{ transform: translateY(120vh) translateX(0) rotate(-6deg); }
       to{ transform: translateY(-25vh) translateX(40px) rotate(10deg); }
     }
 
     .card{
-      width:min(760px, 96vw);
-      padding: clamp(18px, 4.2vw, 34px);
-      border-radius: 28px;
-      background: var(--card);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,.55);
+      width:min(760px,96vw);
+      padding:28px;
+      border-radius:28px;
+      background:var(--card);
+      box-shadow:var(--shadow);
       text-align:center;
-      position:relative;
     }
 
-    h1{
-      font-size: clamp(32px, 6vw, 56px);
-      margin: 6px 0 10px;
-      line-height:1.05;
-    }
-
-    p{
-      font-size: clamp(16px, 2.7vw, 20px);
-      opacity:.92;
-      margin: 0;
-      line-height:1.5;
-    }
+    h1{ font-size:clamp(32px,6vw,56px); margin:6px 0 10px; }
+    p{ font-size:clamp(16px,2.7vw,20px); margin:0; }
 
     .cta{
-      margin-top: 22px;
+      margin-top:22px;
       display:flex;
-      gap: 12px;
+      gap:12px;
       justify-content:center;
       align-items:center;
       flex-wrap:wrap;
@@ -113,62 +89,38 @@
 
     button{
       border:0;
-      padding: 14px 18px;
-      border-radius: 16px;
-      font-size: 18px;
-      font-weight: 800;
+      padding:14px 18px;
+      border-radius:16px;
+      font-size:18px;
+      font-weight:800;
       cursor:pointer;
-      transition: transform .12s ease, filter .12s ease;
-      user-select:none;
-      -webkit-tap-highlight-color: transparent;
     }
-    button:active{ transform: scale(.98); }
 
-    #yes{
-      background:#ff2e7a;
-      color:white;
-      box-shadow: 0 14px 28px rgba(255,46,122,.28);
-    }
-    #yes:hover{ filter: brightness(1.03); transform: translateY(-1px); }
+    #yes{ background:#ff2e7a; color:white; }
 
-    /* A "stage" so the NO button dodges within a safe area on mobile */
     .stage{
       position:relative;
-      width: min(360px, 80vw);
-      height: 64px;
-      flex: 1 1 280px;
-      display:flex;
-      justify-content:center;
-      align-items:center;
+      width:min(360px,80vw);
+      height:64px;
     }
+
     #no{
       position:absolute;
-      left: 50%;
-      top: 0;
-      transform: translateX(-50%);
-      background: rgba(255,255,255,.85);
-      border: 1px solid rgba(0,0,0,.08);
-      color:#222;
-      box-shadow: 0 10px 22px rgba(0,0,0,.06);
+      left:50%;
+      transform:translateX(-50%);
+      background:rgba(255,255,255,.9);
     }
 
     .result{
-      margin-top: 18px;
-      padding: 14px 16px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.72);
-      border: 1px solid rgba(0,0,0,.06);
+      margin-top:18px;
+      padding:14px;
+      border-radius:18px;
+      background:rgba(255,255,255,.75);
       display:none;
     }
-    .yay{
-      font-size: 22px;
-      font-weight: 900;
-      margin-bottom: 6px;
-    }
 
-    /* full-screen confetti */
     .confetti{
-      position: fixed;
+      position:fixed;
       inset:0;
       pointer-events:none;
       display:none;
@@ -177,202 +129,128 @@
     .tiny{
       position:absolute;
       width:10px; height:14px;
-      border-radius: 4px;
-      opacity:.95;
-      animation: pop 1400ms ease-out forwards;
-      left:0; top:0;
+      border-radius:4px;
+      animation:pop 1400ms ease-out forwards;
     }
     @keyframes pop{
-      0%{ transform: translate(var(--x0), var(--y0)) rotate(0deg); opacity:0; }
-      8%{ opacity:1; }
-      100%{ transform: translate(var(--x1), var(--y1)) rotate(720deg); opacity:0; }
-    }
-
-    /* little music widget (hidden until "Yes") */
-    .music-pill{
-      margin-top: 14px;
-      display:none;
-      font-size: 14px;
-      opacity:.75;
+      0%{ transform: translate(var(--x0),var(--y0)); opacity:0; }
+      10%{ opacity:1; }
+      100%{ transform: translate(var(--x1),var(--y1)) rotate(720deg); opacity:0; }
     }
   </style>
 </head>
 
 <body>
-  <div class="floaty" id="floaty"></div>
+<div class="floaty" id="floaty"></div>
 
-  <div class="card">
-    <h1 id="question">Will you be my Valentine?</h1>
-    <p id="sub">I promise excellent vibes and sweet treats 🍓✨</p>
+<div class="card">
+  <h1 id="question">Will you be my Valentine?</h1>
+  <p id="sub">I promise excellent vibes and sweet treats 🍓✨</p>
 
-    <div class="cta">
-      <button id="yes">Yes 💘</button>
-      <div class="stage">
-        <button id="no">No 🙈</button>
-      </div>
-    </div>
-
-    <div class="result" id="result">
-      <div class="yay">YAY!! 💖</div>
-      <div id="msg">cozy night in with treats and ultimate thathi faces 💞</div>
-      <div class="music-pill" id="musicPill">🎶 song is playing</div>
+  <div class="cta">
+    <button id="yes">Yes 💘</button>
+    <div class="stage">
+      <button id="no">No 🙈</button>
     </div>
   </div>
 
-  <div class="confetti" id="confetti"></div>
+  <div class="result" id="result">
+    <div style="font-weight:900;font-size:22px;">YAY!! 💖</div>
+    cozy night in with treats and ultimate thathi faces 💞
+  </div>
+</div>
 
-  <!-- Put your MP3 in the repo and name it song.mp3 (same folder as index.html) -->
-  <audio id="song" preload="auto">
-    <source src="song.mp3" type="audio/mpeg">
-  </audio>
+<div class="confetti" id="confetti"></div>
+
+<audio id="song" preload="auto">
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-  // Small helper: haptics if available
-  function buzz(ms){
-    try{
-      if (navigator.vibrate) navigator.vibrate(ms);
-    }catch(e){}
+function buzz(ms){ if(navigator.vibrate) navigator.vibrate(ms); }
+
+const floaty=document.getElementById("floaty");
+function addHearts(n){
+  for(let i=0;i<n;i++){
+    const h=document.createElement("div");
+    h.className="heart";
+    h.style.left=Math.random()*100+"vw";
+    h.style.top=Math.random()*120+"vh";
+    h.style.animationDuration=(10+Math.random()*14)+"s";
+    floaty.appendChild(h);
   }
-
-  // Floating hearts + chicks background
-  const floaty = document.getElementById("floaty");
-
-  function addHearts(n){
-    for(let i=0;i<n;i++){
-      const h = document.createElement("div");
-      h.className = "heart";
-      const left = Math.random()*100;
-      const delay = Math.random()*-12;
-      const dur = 10 + Math.random()*14;
-      const size = 10 + Math.random()*18;
-      h.style.left = left + "vw";
-      h.style.top = (Math.random()*120) + "vh";
-      h.style.animationDuration = dur + "s";
-      h.style.animationDelay = delay + "s";
-      h.style.width = size + "px";
-      h.style.height = size + "px";
-      h.style.background = "rgba(255,255,255," + (0.35 + Math.random()*0.45) + ")";
-      floaty.appendChild(h);
-    }
+}
+function addChicks(n){
+  for(let i=0;i<n;i++){
+    const c=document.createElement("div");
+    c.className="chick";
+    c.textContent="🐥";
+    c.style.left=Math.random()*100+"vw";
+    c.style.top=Math.random()*120+"vh";
+    c.style.animationDuration=(12+Math.random()*18)+"s";
+    floaty.appendChild(c);
   }
+}
+addHearts(22); addChicks(12);
 
-  function addChicks(n){
-    for(let i=0;i<n;i++){
-      const c = document.createElement("div");
-      c.className = "chick";
-      c.textContent = "🐥";
-      const left = Math.random()*100;
-      const delay = Math.random()*-10;
-      const dur = 12 + Math.random()*18;
-      const size = 18 + Math.random()*18;
-      c.style.left = left + "vw";
-      c.style.top = (Math.random()*120) + "vh";
-      c.style.animationDuration = dur + "s";
-      c.style.animationDelay = delay + "s";
-      c.style.fontSize = size + "px";
-      floaty.appendChild(c);
-    }
+const no=document.getElementById("no");
+const stage=document.querySelector(".stage");
+function moveNo(){
+  const maxX=stage.clientWidth-no.offsetWidth;
+  const maxY=stage.clientHeight-no.offsetHeight;
+  no.style.left=Math.random()*maxX+"px";
+  no.style.top=Math.random()*maxY+"px";
+  no.style.transform="none";
+  buzz(10);
+}
+no.addEventListener("mouseenter",moveNo);
+no.addEventListener("pointerdown",e=>{e.preventDefault();moveNo();});
+
+const confetti=document.getElementById("confetti");
+function launchConfetti(){
+  confetti.style.display="block";
+  confetti.innerHTML="";
+  for(let i=0;i<180;i++){
+    const p=document.createElement("div");
+    p.className="tiny";
+    p.style.setProperty("--x0",(30+Math.random()*40)+"vw");
+    p.style.setProperty("--y0",(55+Math.random()*10)+"vh");
+    p.style.setProperty("--x1",(Math.random()*120-10)+"vw");
+    p.style.setProperty("--y1",(-30-Math.random()*100)+"vh");
+    p.style.background=`hsl(${Math.random()*360},92%,65%)`;
+    confetti.appendChild(p);
   }
+  setTimeout(()=>confetti.style.display="none",1500);
+}
 
-  addHearts(22);
-  addChicks(12);
+/* MUSIC STARTS AT 1:10 */
+const song=document.getElementById("song");
+async function playSong(){
+  try{
+    song.currentTime = 70;   // ← 70 seconds = 1 minute 10 seconds
+    await song.play();
+  }catch{}
+}
 
-  // "No" button dodge (works for mouse + touch)
-  const no = document.getElementById("no");
-  const stage = document.querySelector(".stage");
+const yes=document.getElementById("yes");
+const result=document.getElementById("result");
 
-  function moveNo(){
-    const pad = 6;
-    const maxX = stage.clientWidth - no.offsetWidth - pad;
-    const maxY = stage.clientHeight - no.offsetHeight - pad;
+yes.addEventListener("click",async()=>{
+  document.getElementById("question").textContent="It’s CHICKI TIME! 💖";
+  document.getElementById("sub").textContent="You are the best chick 🐥";
 
-    const x = Math.max(pad, Math.floor(Math.random() * Math.max(1, maxX)));
-    const y = Math.max(pad, Math.floor(Math.random() * Math.max(1, maxY)));
+  result.style.display="block";
+  launchConfetti();
+  buzz([30,40,30]);
 
-    no.style.left = x + "px";
-    no.style.top  = y + "px";
-    no.style.transform = "translateX(0)";
-    buzz(12);
-  }
+  await playSong();
 
-  no.addEventListener("mouseenter", moveNo);
-  no.addEventListener("pointerdown", (e) => { e.preventDefault(); moveNo(); });
-  no.addEventListener("click", (e) => { e.preventDefault(); moveNo(); });
+  yes.disabled=true;
+  no.disabled=true;
 
-  // Confetti
-  const confetti = document.getElementById("confetti");
-  function launchConfetti(){
-    confetti.style.display = "block";
-    confetti.innerHTML = "";
-
-    const pieces = 180;
-    for(let i=0;i<pieces;i++){
-      const p = document.createElement("div");
-      p.className = "tiny";
-
-      // start around center-lower so it feels like it bursts from the card
-      const x0 = (30 + Math.random()*40) + "vw";
-      const y0 = (55 + Math.random()*10) + "vh";
-
-      // fly everywhere
-      const x1 = (Math.random()*120 - 10) + "vw";
-      const y1 = (-30 - Math.random()*100) + "vh";
-
-      p.style.setProperty("--x0", x0);
-      p.style.setProperty("--y0", y0);
-      p.style.setProperty("--x1", x1);
-      p.style.setProperty("--y1", y1);
-      p.style.background = `hsl(${Math.floor(Math.random()*360)}, 92%, 65%)`;
-      p.style.animationDelay = (Math.random()*220) + "ms";
-
-      confetti.appendChild(p);
-    }
-
-    setTimeout(()=> confetti.style.display="none", 1500);
-  }
-
-  // Music (starts on Yes; iPhone/iPad require user interaction)
-  const song = document.getElementById("song");
-  const musicPill = document.getElementById("musicPill");
-
-  async function playSong(){
-    try{
-      // set a friendly volume (optional)
-      song.volume = 0.85;
-      await song.play();
-      musicPill.style.display = "block";
-    }catch(e){
-      // If blocked, show a hint (rare since this is triggered by a click)
-      musicPill.style.display = "block";
-      musicPill.textContent = "🎶 tap again to play the song";
-    }
-  }
-
-  // YES click behavior — your custom text + effects
-  const yes = document.getElementById("yes");
-  const result = document.getElementById("result");
-
-  yes.addEventListener("click", async () => {
-    document.getElementById("question").textContent = "It’s CHICKI TIME! 💖";
-    document.getElementById("sub").textContent = "You are the best chick 🐥";
-
-    result.style.display = "block";
-    launchConfetti();
-
-    // bigger haptic on success
-    buzz([30, 40, 30]);
-
-    // start music on Yes
-    await playSong();
-
-    yes.disabled = true;
-    no.disabled = true;
-    no.style.opacity = .6;
-
-    // extra celebration: add a few more floating chicks after yes
-    addChicks(8);
-    addHearts(10);
-  });
+  addChicks(8);
+  addHearts(10);
+});
 </script>
 
 </body>

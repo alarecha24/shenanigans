@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>💌 Valentine?</title>
+
   <style>
     :root{
       --bg1:#ff7aa8;
@@ -12,13 +13,15 @@
       --card:rgba(255,255,255,.78);
       --shadow:0 20px 60px rgba(0,0,0,.18);
     }
+
     *{box-sizing:border-box}
+
     body{
       margin:0;
       min-height:100vh;
       display:grid;
       place-items:center;
-      font-family: ui-rounded, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+      font-family: ui-rounded, system-ui, -apple-system, Segoe UI, Roboto, Arial;
       color:var(--ink);
       overflow:hidden;
       background:
@@ -26,17 +29,14 @@
         radial-gradient(900px 600px at 85% 80%, rgba(255,255,255,.45), transparent 55%),
         linear-gradient(135deg, var(--bg1), var(--bg2));
     }
-    .floaty{
-      position:absolute; inset:-10vh -10vw;
-      pointer-events:none;
-      opacity:.85;
-      filter: blur(.2px);
-    }
+
+    /* floating hearts */
+    .floaty{ position:absolute; inset:-10vh -10vw; pointer-events:none; }
     .heart{
       position:absolute;
       width:18px; height:18px;
       transform: rotate(45deg);
-      background: rgba(255,255,255,.55);
+      background: rgba(255,255,255,.6);
       animation: drift linear infinite;
       border-radius: 3px;
     }
@@ -47,8 +47,8 @@
       background: inherit;
       border-radius: 50%;
     }
-    .heart:before{ left:-9px; top:0; }
-    .heart:after{ left:0; top:-9px; }
+    .heart:before{ left:-9px; }
+    .heart:after{ top:-9px; }
 
     @keyframes drift{
       from{ transform: translateY(120vh) rotate(45deg); }
@@ -57,95 +57,62 @@
 
     .card{
       width:min(760px, 92vw);
-      padding: clamp(18px, 3.8vw, 34px);
+      padding: 30px;
       border-radius: 28px;
       background: var(--card);
       box-shadow: var(--shadow);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,.55);
-      position:relative;
-    }
-
-    .topline{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:14px;
-      opacity:.9;
-      font-weight:600;
-      letter-spacing:.2px;
-    }
-    .badge{
-      font-size:14px;
-      padding:8px 12px;
-      border-radius:999px;
-      background: rgba(255,255,255,.65);
-      border:1px solid rgba(0,0,0,.06);
+      text-align:center;
     }
 
     h1{
-      margin: 18px 0 10px;
       font-size: clamp(34px, 5vw, 56px);
-      line-height:1.05;
+      margin-bottom:10px;
     }
+
     p{
-      margin: 10px 0 0;
-      font-size: clamp(16px, 2.3vw, 20px);
-      line-height:1.55;
-      opacity:.92;
+      font-size:18px;
+      opacity:.9;
     }
 
     .cta{
-      margin-top: 26px;
+      margin-top: 25px;
       display:flex;
-      flex-wrap:wrap;
-      gap: 14px;
-      align-items:center;
+      justify-content:center;
+      gap:15px;
+      position:relative;
+      height:70px;
     }
+
     button{
       border:0;
-      padding: 14px 18px;
+      padding: 14px 20px;
       border-radius: 16px;
-      font-size: 18px;
-      font-weight: 700;
+      font-size:18px;
+      font-weight:700;
       cursor:pointer;
-      transition: transform .12s ease, filter .12s ease;
-      user-select:none;
     }
-    button:active{ transform: scale(.98); }
 
     #yes{
-      background: #ff2e7a;
+      background:#ff2e7a;
       color:white;
       box-shadow: 0 14px 28px rgba(255,46,122,.28);
     }
-    #yes:hover{ filter: brightness(1.03); transform: translateY(-1px); }
 
     #no{
-      background: rgba(255,255,255,.7);
-      color: #222;
-      border: 1px solid rgba(0,0,0,.08);
-    }
-
-    .stage{
-      position:relative;
-      height: 70px;
-      flex: 1 1 260px;
-      min-width: 260px;
-    }
-    .stage #no{
       position:absolute;
-      left: 140px;
-      top: 0px;
+      left:120px;
+      background: rgba(255,255,255,.8);
     }
 
     .result{
-      margin-top: 18px;
-      padding: 14px 16px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.7);
-      border: 1px solid rgba(0,0,0,.06);
+      margin-top:20px;
       display:none;
+      font-size:20px;
+      font-weight:600;
     }
 
+    /* confetti */
     .confetti{
       position: fixed;
       inset:0;
@@ -155,8 +122,7 @@
     .tiny{
       position:absolute;
       width:10px; height:14px;
-      border-radius: 4px;
-      opacity:.9;
+      border-radius:4px;
       animation: pop 1200ms ease-out forwards;
     }
     @keyframes pop{
@@ -164,147 +130,85 @@
       10%{ opacity:1; }
       100%{ transform: translate(var(--x1), var(--y1)) rotate(520deg); opacity:0; }
     }
-
-    .footer{
-      margin-top: 18px;
-      font-size: 13px;
-      opacity:.75;
-      display:flex; gap:10px; flex-wrap:wrap;
-    }
-    .hint{
-      font-style: italic;
-    }
   </style>
 </head>
 
 <body>
-  <div class="floaty" id="floaty"></div>
 
-  <div class="card">
-    <div class="topline">
-      <div class="badge">💌 A tiny question…</div>
-      <div class="badge" id="today"></div>
-    </div>
+<div class="floaty" id="floaty"></div>
 
-    <h1 id="question">Will you be my Valentine?</h1>
-    <p id="sub">
-      I promise excellent vibes, questionable jokes, and at least one sweet treat. 🍓✨
-    </p>
+<div class="card">
+  <h1 id="question">Will you be my Valentine?</h1>
+  <p id="sub">I promise excellent vibes and sweet treats 🍓✨</p>
 
-    <div class="cta">
-      <button id="yes">Yes 💘</button>
-      <div class="stage" aria-hidden="false">
-        <button id="no">No 🙈</button>
-      </div>
-    </div>
-
-    <div class="result" id="result">
-      <div style="font-size:22px; font-weight:800; margin-bottom:6px;">YAY!! 💖</div>
-      <div id="msg"></div>
-    </div>
-
-    <div class="footer">
-      <span class="hint">Tip: personalize the message inside the code (search for “PERSONALIZE ME”).</span>
-    </div>
+  <div class="cta">
+    <button id="yes">Yes 💘</button>
+    <button id="no">No 🙈</button>
   </div>
 
-  <div class="confetti" id="confetti"></div>
+  <div class="result" id="result">
+    cozy night in with treats and ultimate thathi faces 💞
+  </div>
+</div>
+
+<div class="confetti" id="confetti"></div>
 
 <script>
-  // Date badge
-  const d = new Date();
-  document.getElementById("today").textContent =
-    d.toLocaleDateString(undefined, { weekday:"short", month:"short", day:"numeric" });
+/* floating hearts */
+const floaty = document.getElementById("floaty");
+for(let i=0;i<24;i++){
+  const h = document.createElement("div");
+  h.className="heart";
+  h.style.left=Math.random()*100+"vw";
+  h.style.top=Math.random()*120+"vh";
+  h.style.animationDuration=(10+Math.random()*14)+"s";
+  floaty.appendChild(h);
+}
 
-  // Floating hearts background
-  const floaty = document.getElementById("floaty");
-  const hearts = 24;
-  for(let i=0;i<hearts;i++){
-    const h = document.createElement("div");
-    h.className = "heart";
-    const left = Math.random()*100;
-    const delay = Math.random()*-12;
-    const dur = 10 + Math.random()*14;
-    const size = 10 + Math.random()*18;
-    h.style.left = left + "vw";
-    h.style.top = (Math.random()*120) + "vh";
-    h.style.animationDuration = dur + "s";
-    h.style.animationDelay = delay + "s";
-    h.style.width = size + "px";
-    h.style.height = size + "px";
-    h.style.background = "rgba(255,255,255," + (0.35 + Math.random()*0.4) + ")";
-    floaty.appendChild(h);
+/* dodging no button */
+const no=document.getElementById("no");
+function moveNo(){
+  const maxX=250;
+  const maxY=40;
+  no.style.left=Math.random()*maxX+"px";
+  no.style.top=Math.random()*maxY+"px";
+}
+no.addEventListener("mouseenter",moveNo);
+no.addEventListener("click",moveNo);
+
+/* confetti */
+const confetti=document.getElementById("confetti");
+function launchConfetti(){
+  confetti.style.display="block";
+  confetti.innerHTML="";
+  for(let i=0;i<120;i++){
+    const p=document.createElement("div");
+    p.className="tiny";
+    p.style.setProperty("--x0",Math.random()*100+"vw");
+    p.style.setProperty("--y0",(50+Math.random()*10)+"vh");
+    p.style.setProperty("--x1",(Math.random()*120-10)+"vw");
+    p.style.setProperty("--y1",(-20-Math.random()*80)+"vh");
+    p.style.background=`hsl(${Math.random()*360},90%,65%)`;
+    confetti.appendChild(p);
   }
+  setTimeout(()=>confetti.style.display="none",1400);
+}
 
-  // "No" button dodge
-  const no = document.getElementById("no");
-  const stage = document.querySelector(".stage");
+/* YES click behavior — your custom text */
+const yes=document.getElementById("yes");
+const result=document.getElementById("result");
 
-  function moveNo(){
-    const pad = 6;
-    const maxX = stage.clientWidth - no.offsetWidth - pad;
-    const maxY = stage.clientHeight - no.offsetHeight - pad;
+yes.addEventListener("click",()=>{
+  document.getElementById("question").textContent="It’s CHICKI TIME! 💖";
+  document.getElementById("sub").textContent="You are the best chick 🐥";
 
-    const x = Math.max(pad, Math.floor(Math.random()*maxX));
-    const y = Math.max(pad, Math.floor(Math.random()*maxY));
+  result.style.display="block";
+  launchConfetti();
 
-    no.style.left = x + "px";
-    no.style.top  = y + "px";
-  }
-
-  no.addEventListener("mouseenter", moveNo);
-  no.addEventListener("touchstart", (e) => { e.preventDefault(); moveNo(); }, {passive:false});
-  no.addEventListener("click", moveNo);
-
-  // Confetti
-  const confetti = document.getElementById("confetti");
-  function launchConfetti(){
-    confetti.style.display = "block";
-    confetti.innerHTML = "";
-    const pieces = 120;
-    for(let i=0;i<pieces;i++){
-      const p = document.createElement("div");
-      p.className = "tiny";
-      const x0 = (Math.random()*100) + "vw";
-      const y0 = (50 + Math.random()*10) + "vh";
-      const x1 = (Math.random()*120 - 10) + "vw";
-      const y1 = (-20 - Math.random()*80) + "vh";
-      p.style.left = "0";
-      p.style.top = "0";
-      p.style.setProperty("--x0", x0);
-      p.style.setProperty("--y0", y0);
-      p.style.setProperty("--x1", x1);
-      p.style.setProperty("--y1", y1);
-      p.style.background = `hsl(${Math.floor(Math.random()*360)}, 90%, 65%)`;
-      p.style.animationDelay = (Math.random()*180) + "ms";
-      confetti.appendChild(p);
-    }
-    setTimeout(()=> confetti.style.display="none", 1400);
-  }
-
-  // Yes click behavior
-  const yes = document.getElementById("yes");
-  const result = document.getElementById("result");
-  const msg = document.getElementById("msg");
-
-  yes.addEventListener("click", () => {
-    document.getElementById("question").textContent = "It’s CHICKI Time! 💞";
-    document.getElementById("sub").textContent =
-      "Okay, now I’m smiling like an idiot. Mission accomplished.";
-
-    // Sponsored by Chicki Enterprises:
-    msg.innerHTML = `
-      I’m officially asking you out for Valentine’s. 💌<br/>
-      Pick the vibe: cozy night in 🍿, cute dinner 🍝, or mini adventure 🚗✨
-    `;
-
-    result.style.display = "block";
-    launchConfetti();
-
-    yes.disabled = true;
-    no.disabled = true;
-    no.style.opacity = .6;
-  });
+  yes.disabled=true;
+  no.disabled=true;
+});
 </script>
+
 </body>
 </html>

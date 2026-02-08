@@ -149,7 +149,7 @@
 
 <div class="card">
   <h1 id="question">Will you be my Valentine?</h1>
-  <p id="sub">I promise excellent vibes and sweet treats 🍓✨</p>
+  <p id="sub">(I WANT YOU) 🍓✨</p>
 
   <div class="cta">
     <button id="yes">Yes 💘</button>
@@ -238,7 +238,7 @@ const song=document.getElementById("song");
 
 async function playSong(){
   try{
-    song.currentTime = 70; // 1:10
+    song.currentTime = 75; // 1:15
     await song.play();
   }catch{}
 }
@@ -248,7 +248,7 @@ const result=document.getElementById("result");
 
 yes.addEventListener("click",async()=>{
   document.getElementById("question").textContent="It’s CHICKI TIME! 💖";
-  document.getElementById("sub").textContent="You are the best chick 🐥";
+  document.getElementById("sub").textContent="Yoi are the best chick 🐥";
 
   result.style.display="block";
   launchConfetti();
